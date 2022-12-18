@@ -18,7 +18,7 @@ enum MuzicalNote{
         return "\( Self.basicNames[semiTone] )\( octave )"
     } //func
 } //cl
-struct NoteInterval {
+struct NoteInterval: Hashable {
     let rootNote: Int
     let size: Int
 } //str

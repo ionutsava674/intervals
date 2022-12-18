@@ -8,9 +8,11 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var currentGame: GameData? = nil
+    @State private var showingGame = false
     var body: some View {
         //GameViewV1()
-        GameViewV2(gameData:  GameData() )
+        GameViewV2(gameData:  GameData(questionTarget: 3) )
     } //body
 } //str
 
