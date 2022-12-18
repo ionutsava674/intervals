@@ -11,21 +11,6 @@ class GameData: ObservableObject {
     static let selectedInstrument = Instrument(name: "", minNote: 45, maxNote: 72)
     private let glop = GlobalPreferences2.global
     
-    var totalGuesses: Int {
-        allQuestions.count
-    } //cv
-    var correctGuesses: Int {
-        allQuestions.filter { question in
-            question.value.last?.interval == question.key.size
-        } //filt
-        .count
-    } //cv
-    var wrongGuesses: Int {
-        allQuestions.filter { question in
-            question.value.last?.interval != question.key.size
-        } //filt
-        .count
-    } //cv
     @Published var currentGuess: Int?
     @Published var isGuessingState = true
     
@@ -35,7 +20,11 @@ class GameData: ObservableObject {
     
     @Published var startTime: Date
     @Published var endTime: Date?
+    @Published var finalEndTime: Date?
+    
     @Published var questionTarget: Int
+    @Published var questionCounter: Int
+    @Published var correctGuessCounter: Int
     enum GameStateType: Int {
         case playing, summary, revisiting
     } //enum
@@ -43,6 +32,22 @@ class GameData: ObservableObject {
 
     typealias Answer = (interval: Int, playedBeforeAnswer: Int)
     @Published var allQuestions: [NoteInterval: [Answer]]
+    var totalDistinctQuestions: Int {
+        allQuestions.count
+    } //cv
+    var correctDistinctGuesses: Int {
+        allQuestions.filter { question in
+            question.value.last?.interval == question.key.size
+        } //filt
+        .count
+    } //cv
+    var wrongDistinctGuesses: Int {
+        allQuestions.filter { question in
+            question.value.last?.interval != question.key.size
+        } //filt
+        .count
+    } //cv
+    
     @Published var revisitationQuestions: [(asked: NoteInterval, answered: Bool)]
     var revisitationCurrentIndex: Int? {
         revisitationQuestions.firstIndex {
@@ -83,8 +88,9 @@ class GameData: ObservableObject {
         currentGuess = interval
         addAnswer(intervalRoot: currentRevNote.rootNote, intervalSize: currentRevNote.size, answeredSize: interval, timesPlayed: chosenIntervalTimesPlayed)
         isGuessingState = false
-        guard revisitationsLeft else {
+        if (revisitationCurrentIndex ?? -1) == (revisitationQuestions.endIndex - 1) {
             //end revisit
+            finalEndTime = .now
             return
         } //gua
     } //func
@@ -107,12 +113,17 @@ class GameData: ObservableObject {
         self.chosenRoot = 0
         
         self.questionTarget = questionTarget
+        self.questionCounter = 0
+        self.correctGuessCounter = 0
+        
         gameState = .playing
         allQuestions = [:]
         revisitationQuestions = []
         
         self.endTime = nil
+        self.finalEndTime = nil
         self.startTime = Date.now
+        chooseNewRoot()
         chooseNewSize( mustBeDifferent: glop.newIntervalMustBeDifferent)
     } //init
     func actionGuess(interval: Int)  {
@@ -121,7 +132,9 @@ class GameData: ObservableObject {
         }
         currentGuess = interval
         addAnswer(intervalRoot: chosenRoot, intervalSize: chosenIntervalSize, answeredSize: interval, timesPlayed: chosenIntervalTimesPlayed)
-        
+        questionCounter += 1
+        correctGuessCounter += (currentGuess == chosenIntervalSize) ? 1 : 0
+
         isGuessingState = false
         guard !checkTargetReached() else {
             //end game
@@ -165,13 +178,13 @@ class GameData: ObservableObject {
     } //func
     func canRevisit() -> Bool {
         return gameState == .summary
-        && (wrongGuesses > 0)
+        && (wrongDistinctGuesses > 0)
     } //func
     private func checkTargetReached() -> Bool {
         guard questionTarget > 0 else {
             return false
         } //gua
-        return totalGuesses >= questionTarget
+        return questionCounter >= questionTarget
     }
     private func resetGuessingState() {
         isGuessingState = true

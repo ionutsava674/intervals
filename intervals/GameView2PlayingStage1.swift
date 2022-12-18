@@ -1,5 +1,5 @@
 //
-//  GameView2Revisit.swift
+//  GameView2PlayingStage1.swift
 //  intervals
 //
 //  Created by Ionut on 18.12.2022.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct GameView2Revisit: View {
+struct GameView2PlayingStage1: View {
     @ObservedObject private var glop = GlobalPreferences2.global
     @ObservedObject var gameData: GameData
     
@@ -18,29 +18,27 @@ struct GameView2Revisit: View {
         guard !gameData.isGuessingState else {
             return "guess the interval"
         } //gua
-        guard let ci = gameData.revisitationCurrentInterval else {
-            return "error"
-        }
-        return gameData.currentGuess == ci.size
-        ? "correct (\(ci.size))"
-        : "wrong (\(ci.size))"
+        return gameData.currentGuess == gameData.chosenIntervalSize
+        ? "correct (\(gameData.chosenIntervalSize)"
+        : "wrong (\(gameData.chosenIntervalSize)"
     } //cv
     var body: some View {
         VStack {
-            Gauge(value: Float( ( gameData.isGuessingState ? 0 : 1 ) + (gameData.revisitationCurrentIndex ?? 0)), in: 0.0 ... Float(gameData.revisitationQuestions.count)) {
-                Text("question \(1 + (gameData.revisitationCurrentIndex ?? -1)) of \( gameData.revisitationQuestions.count )")
-            } //ga
-            Button("  ") {
-                gameData.actionPlayCurrentRevisitation()
-            } //btn
-            .padding()
-            .accessibilityFocused($playFocused)
+            Text("score \( gameData.correctGuessCounter ) / \( gameData.questionCounter )")
+            HStack {
+                Button("  ") {
+                    gameData.actionPlayChosen()
+                } //btn
+                .padding()
+                .accessibilityFocused($playFocused)
+            } //hs
             Button(correctBtnTitle) {
                 guard gameData.isGuessingState else {
-                    gameData.actionAcknowledgeRevisitation()
+                    gameData.actionAcknowledgeAndReset()
                     playFocused = true
                     return
                 } //gua
+                //guess(interval: 0)
             } //btn
             .accessibilityFocused($correctFocused)
             .disabled(gameData.isGuessingState)
@@ -52,16 +50,13 @@ struct GameView2Revisit: View {
                             Button {
                                 let semitones = 1 + 3 * row + col
                                 guard gameData.isGuessingState else {
-                                    guard let newReNote = gameData.revisitationCurrentInterval else {
-                                        return
-                                    } //gua2
                                     let newRoot = glop.randomizeRootEachPlay
                                     ? Int.random(in: GameData.selectedInstrument.minNote ... GameData.selectedInstrument.maxIntervalRoot(for: semitones))
-                                    : newReNote.rootNote
+                                    : gameData.chosenRoot
                                     gameData.playNow(root: newRoot, interval: semitones)
                                     return
-                                } //gua 1
-                                gameData.actionReGuess(interval: semitones)
+                                } //gua
+                                gameData.actionGuess(interval: semitones)
                                 correctFocused = true
                             } label: {
                                 VStack {

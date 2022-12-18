@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C61EA1D829477723005A43C7 /* sfx2 in Resources */ = {isa = PBXBuildFile; fileRef = C61EA1D729477723005A43C7 /* sfx2 */; };
+		C6238CBA294F9DB20049218F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6238CB9294F9DB20049218F /* SettingsView.swift */; };
 		C6A4B33B2947A6D900CEA07B /* groupedAsync.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A4B33A2947A6D900CEA07B /* groupedAsync.swift */; };
 		C6A5A6FC294C63290009D096 /* GameData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A5A6FB294C63290009D096 /* GameData.swift */; };
 		C6E27B132948CFCE009948FB /* Instrument.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6E27B122948CFCE009948FB /* Instrument.swift */; };
@@ -27,6 +28,7 @@
 
 /* Begin PBXFileReference section */
 		C61EA1D729477723005A43C7 /* sfx2 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = sfx2; sourceTree = "<group>"; };
+		C6238CB9294F9DB20049218F /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		C6A4B33A2947A6D900CEA07B /* groupedAsync.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = groupedAsync.swift; sourceTree = "<group>"; };
 		C6A5A6FB294C63290009D096 /* GameData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameData.swift; sourceTree = "<group>"; };
 		C6E27B122948CFCE009948FB /* Instrument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Instrument.swift; sourceTree = "<group>"; };
@@ -82,6 +84,7 @@
 				C6F62796294F19D900ADB0FE /* GameView2PlayingStage1.swift */,
 				C6F62798294F19FA00ADB0FE /* GameView2Summary.swift */,
 				C6F6279A294F1A1900ADB0FE /* GameView2Revisit.swift */,
+				C6238CB9294F9DB20049218F /* SettingsView.swift */,
 				C6F62792294EF5A000ADB0FE /* GameViewV1.swift */,
 				C6A5A6FB294C63290009D096 /* GameData.swift */,
 				C6E27B122948CFCE009948FB /* Instrument.swift */,
@@ -187,6 +190,7 @@
 				C6E27B15294908AE009948FB /* PreferencesClass.swift in Sources */,
 				C6F62793294EF5A000ADB0FE /* GameViewV1.swift in Sources */,
 				C6F62797294F19D900ADB0FE /* GameView2PlayingStage1.swift in Sources */,
+				C6238CBA294F9DB20049218F /* SettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

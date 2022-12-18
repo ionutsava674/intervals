@@ -45,7 +45,7 @@ class GameSound {
         if let fi = players.firstIndex(where: { p in
             !(p.isPlaying || p.allocated)
         }) {
-            print("playing free \(fi)")
+            //print("playing free \(fi)")
             let player = players[fi]
             player.allocated = true
             player.prepareToPlay()
@@ -56,7 +56,7 @@ class GameSound {
             guard let player = try? UpAudioPlayer(data: soundData) else {
                 return nil
             }
-            print("playing new \(players.count)")
+            //print("playing new \(players.count)")
             player.allocated = true
             player.prepareToPlay()
             players.insert(player, at: 0)
@@ -65,7 +65,7 @@ class GameSound {
         if let li = players.lastIndex(where: { p in
             true//!p.allocated
         }) {
-            print("playing use \(li)")
+            //print("playing use \(li)")
             let player = players[li]
             player.stop()
             player.allocated = true
