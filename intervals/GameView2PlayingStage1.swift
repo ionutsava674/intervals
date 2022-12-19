@@ -10,6 +10,7 @@ import SwiftUI
 struct GameView2PlayingStage1: View {
     @ObservedObject private var glop = GlobalPreferences2.global
     @ObservedObject var gameData: GameData
+    @Binding var keepAlive: Bool
     
     @AccessibilityFocusState private var playFocused: Bool
     @AccessibilityFocusState private var correctFocused: Bool
@@ -19,8 +20,8 @@ struct GameView2PlayingStage1: View {
             return "guess the interval"
         } //gua
         return gameData.currentGuess == gameData.chosenIntervalSize
-        ? "correct (\(gameData.chosenIntervalSize)"
-        : "wrong (\(gameData.chosenIntervalSize)"
+        ? "correct (\(gameData.chosenIntervalSize))"
+        : "wrong (\(gameData.chosenIntervalSize))"
     } //cv
     var body: some View {
         VStack {
@@ -73,6 +74,19 @@ struct GameView2PlayingStage1: View {
                     } //hs
                 } //fe
             } //vs
+            if gameData.questionTarget == 0 {
+                Button {
+                    gameData.fromPlayingToSummary()
+                } label: {
+                    Text("Finish game")
+                        .padding()
+                } //btn
+            } //if
         } //vs
+        .onAppear {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.45) {
+                self.playFocused = true
+            }
+        } //app
     } //body
 } //str

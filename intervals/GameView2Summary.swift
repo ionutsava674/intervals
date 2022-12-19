@@ -9,6 +9,7 @@ import SwiftUI
 
 struct GameView2Summary: View {
     @ObservedObject var gameData: GameData
+    @Binding var keepAlive: Bool
     var body: some View {
         VStack(spacing: 10) {
             Text("Initial score \( gameData.correctGuessCounter ) / \( gameData.questionCounter ), \( gameData.totalDistinctQuestions ) distinct intervals")
@@ -25,6 +26,11 @@ struct GameView2Summary: View {
                     Text("Go over the wrong answers again")
                 } //btn
             } //if
+            /*/
+            Button("Close game") {
+                keepAlive = false
+            } //btn
+             */
         } //vs
     } //body
 } //str

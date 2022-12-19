@@ -139,7 +139,6 @@ class GameData: ObservableObject {
         guard !checkTargetReached() else {
             //end game
             endTime = .now
-            //gameState = .summary
             return
         }
     } //func
@@ -152,6 +151,10 @@ class GameData: ObservableObject {
         resetGuessingState()
         chooseNewSize( mustBeDifferent: glop.newIntervalMustBeDifferent)
     } //func
+    func fromPlayingToSummary() {
+        endTime = .now
+        gameState = .summary
+    }
     func actionPlayChosen() {
         if glop.randomizeRootEachPlay {
             chooseNewRoot()

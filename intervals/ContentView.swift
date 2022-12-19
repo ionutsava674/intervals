@@ -14,15 +14,48 @@ struct ContentView: View {
         //GameViewV1()
         //GameViewV2(gameData:  GameData(questionTarget: 3) )
         if showingGame {
-            GameViewV2(gameData:  self.currentGame )
+            GameViewV2(gameData:  self.currentGame, keepAlive: $showingGame )
+            /*
+            Button("close") {
+                withAnimation(.easeIn(duration: 4)) {
+                    showingGame = false
+                } //wa
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(.white)
+             */
+                .transition(.asymmetric(insertion: .move(edge: .bottom), removal: .move(edge: .trailing)))
         } else {
-            VStack {
+            VStack(spacing: 12) {
                 Button("20 intervals") {
                     currentGame = GameData(questionTarget: 20)
-                    showingGame = true
+                    withAnimation {
+                        showingGame = true
+                    } //wa
+                } //btn
+                Button("50 intervals") {
+                    currentGame = GameData(questionTarget: 50)
+                    withAnimation {
+                        showingGame = true
+                    } //wa
+                } //btn
+                Button("100 intervals") {
+                    currentGame = GameData(questionTarget: 100)
+                    withAnimation {
+                        showingGame = true
+                    } //wa
+                } //btn
+                Button("no limit game") {
+                    currentGame = GameData(questionTarget: 0)
+                    withAnimation {
+                        showingGame = true
+                    } //wa
                 } //btn
                 SettingsView()
             } //vs
+            //.frame(maxWidth: .infinity, maxHeight: .infinity)
+            //.background(.red)
+            .transition(.asymmetric(insertion: .move(edge: .bottom), removal: .move(edge: .trailing)))
         } //ife
     } //body
 } //str

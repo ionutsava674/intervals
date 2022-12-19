@@ -10,6 +10,7 @@ import SwiftUI
 struct GameView2Revisit: View {
     @ObservedObject private var glop = GlobalPreferences2.global
     @ObservedObject var gameData: GameData
+    @Binding var keepAlive: Bool
     
     @AccessibilityFocusState private var playFocused: Bool
     @AccessibilityFocusState private var correctFocused: Bool
@@ -79,5 +80,10 @@ struct GameView2Revisit: View {
                 } //fe
             } //vs
         } //vs
+        .onAppear {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.45) {
+                self.playFocused = true
+            }
+        } //app
     } //body
 } //str
