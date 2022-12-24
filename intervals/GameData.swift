@@ -8,8 +8,9 @@
 import Foundation
 
 class GameData: ObservableObject {
-    static let selectedInstrument = Instrument(name: "", minNote: 45, maxNote: 72)
+    //static let selectedInstrument = Instrument(name: "", minNote: 45, maxNote: 72)
     private let glop = GlobalPreferences2.global
+    var selectedInstrument: Instrument
     
     @Published var currentGuess: Int?
     @Published var isGuessingState = true
@@ -106,7 +107,10 @@ class GameData: ObservableObject {
             return
         } //gua
     } //func
-    init(questionTarget: Int = 0) {
+    init(questionTarget: Int = 0, instrumentName: String = "") {
+        let instData = GlobalPreferences2.availableInstruments[instrumentName] ?? ("", 0, 0)
+        self.selectedInstrument = Instrument(name: instrumentName, minNote: instData.minNote, maxNote: instData.maxNote)
+        
         self.currentGuess = nil
         self.isGuessingState = true
         self.chosenIntervalSize = 0
@@ -196,13 +200,13 @@ class GameData: ObservableObject {
     } //func
     func playNow(root: Int, interval: Int) -> Void {
         let i = NoteInterval(rootNote: root, size: interval)
-        _ = Self.selectedInstrument.playInterval(i, with: 0.75)
+        _ = self.selectedInstrument.playInterval(i, with: glop.intervalTime)
     } //func
     private func chooseNewRoot() {
-        var newVal = Int.random(in: Self.selectedInstrument.minNote ... Self.selectedInstrument.maxIntervalRoot(for: chosenIntervalSize))
-        while (Self.selectedInstrument.minNote < Self.selectedInstrument.maxIntervalRoot(for: chosenIntervalSize))
+        var newVal = Int.random(in: self.selectedInstrument.minNote ... self.selectedInstrument.maxIntervalRoot(for: chosenIntervalSize))
+        while (self.selectedInstrument.minNote < self.selectedInstrument.maxIntervalRoot(for: chosenIntervalSize))
         && (newVal == chosenRoot) {
-            newVal = Int.random(in: Self.selectedInstrument.minNote ... Self.selectedInstrument.maxIntervalRoot(for: chosenIntervalSize))
+            newVal = Int.random(in: self.selectedInstrument.minNote ... self.selectedInstrument.maxIntervalRoot(for: chosenIntervalSize))
         }
         chosenRoot = newVal
     } //func
@@ -222,7 +226,7 @@ class GameData: ObservableObject {
         if !(1 ... self.glop.maxSizeToRandomize).contains(chosenIntervalSize) {
             chooseNewSize(mustBeDifferent: false)
         }
-        if !(Self.selectedInstrument.minNote ... Self.selectedInstrument.maxIntervalRoot(for: chosenIntervalSize)).contains(chosenRoot) {
+        if !(self.selectedInstrument.minNote ... self.selectedInstrument.maxIntervalRoot(for: chosenIntervalSize)).contains(chosenRoot) {
             chooseNewRoot()
         }
     } //func

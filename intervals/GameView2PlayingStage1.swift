@@ -52,7 +52,7 @@ struct GameView2PlayingStage1: View {
                                 let semitones = 1 + 3 * row + col
                                 guard gameData.isGuessingState else {
                                     let newRoot = glop.randomizeRootEachPlay
-                                    ? Int.random(in: GameData.selectedInstrument.minNote ... GameData.selectedInstrument.maxIntervalRoot(for: semitones))
+                                    ? Int.random(in: gameData.selectedInstrument.minNote ... gameData.selectedInstrument.maxIntervalRoot(for: semitones))
                                     : gameData.chosenRoot
                                     gameData.playNow(root: newRoot, interval: semitones)
                                     return

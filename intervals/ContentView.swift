@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var currentGame: GameData = GameData(questionTarget: 0)
+    @ObservedObject private var glop = GlobalPreferences2.global
+    @State private var currentGame: GameData = GameData(questionTarget: 0, instrumentName: GlobalPreferences2.global.selectedInstrumentName)
     @State private var showingGame = false
     var body: some View {
         //GameViewV1()
@@ -28,25 +29,25 @@ struct ContentView: View {
         } else {
             VStack(spacing: 12) {
                 Button("20 intervals") {
-                    currentGame = GameData(questionTarget: 20)
+                    currentGame = GameData(questionTarget: 20, instrumentName: glop.selectedInstrumentName)
                     withAnimation {
                         showingGame = true
                     } //wa
                 } //btn
                 Button("50 intervals") {
-                    currentGame = GameData(questionTarget: 50)
+                    currentGame = GameData(questionTarget: 50, instrumentName: glop.selectedInstrumentName)
                     withAnimation {
                         showingGame = true
                     } //wa
                 } //btn
                 Button("100 intervals") {
-                    currentGame = GameData(questionTarget: 100)
+                    currentGame = GameData(questionTarget: 100, instrumentName: glop.selectedInstrumentName)
                     withAnimation {
                         showingGame = true
                     } //wa
                 } //btn
                 Button("no limit game") {
-                    currentGame = GameData(questionTarget: 0)
+                    currentGame = GameData(questionTarget: 0, instrumentName: glop.selectedInstrumentName)
                     withAnimation {
                         showingGame = true
                     } //wa

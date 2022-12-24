@@ -13,7 +13,9 @@ struct SettingsView: View {
     var body: some View {
         VStack {
             Button(self.showingOptions ? "hide options" : "show options") {
-                self.showingOptions.toggle()
+                withAnimation {
+                    self.showingOptions.toggle()
+                } //wa
             }
             if showingOptions {
                 VStack {
@@ -25,6 +27,18 @@ struct SettingsView: View {
                         } //fe
                     } //pk
                     Toggle("new interval must be different", isOn: $glop.newIntervalMustBeDifferent)
+                    Picker("interval time", selection: $glop.intervalTime) {
+                        ForEach(GlobalPreferences2.availableIntervalTimes, id: \.self) {
+                            Text(String.init(format: "%.2g s, %.2g bpm", $0, 60 / $0))
+                        } //fe
+                    } //pk
+                    Picker("instrument", selection: $glop.selectedInstrumentName) {
+                        ForEach(GlobalPreferences2.availableInstruments.keys.filter({ k in
+                            true
+                        }), id: \.self) {
+                            Text(GlobalPreferences2.availableInstruments[$0]?.name ?? "")
+                        } //fe
+                    } //pk
                 } //vs
             } //if
         } //vs
