@@ -50,7 +50,7 @@ struct GameView2Revisit: View {
                 ForEach(0..<4) {row in
                     HStack {
                         ForEach(0..<3) {col in
-                            Button {
+                            Button { // pad
                                 let semitones = 1 + 3 * row + col
                                 guard gameData.isGuessingState else {
                                     guard let newReNote = gameData.revisitationCurrentInterval else {
@@ -59,10 +59,10 @@ struct GameView2Revisit: View {
                                     let newRoot = glop.randomizeRootEachPlay
                                     ? Int.random(in: gameData.selectedInstrument.minNote ... gameData.selectedInstrument.maxIntervalRoot(for: semitones))
                                     : newReNote.rootNote
-                                    gameData.playNow(root: newRoot, interval: semitones)
+                                    gameData.playNow( root: newRoot, interval: semitones)
                                     return
                                 } //gua 1
-                                gameData.actionReGuess(interval: semitones)
+                                gameData.actionReGuess( interval: semitones)
                                 correctFocused = true
                             } label: {
                                 VStack {

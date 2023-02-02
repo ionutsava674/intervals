@@ -11,9 +11,8 @@ struct ContentView: View {
     @ObservedObject private var glop = GlobalPreferences2.global
     @State private var currentGame: GameData = GameData(questionTarget: 0, instrumentName: GlobalPreferences2.global.selectedInstrumentName)
     @State private var showingGame = false
+    @State private var showingSettings = false
     var body: some View {
-        //GameViewV1()
-        //GameViewV2(gameData:  GameData(questionTarget: 3) )
         if showingGame {
             GameViewV2(gameData:  self.currentGame, keepAlive: $showingGame )
             /*
@@ -25,9 +24,11 @@ struct ContentView: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(.white)
              */
-                .transition(.asymmetric(insertion: .move(edge: .bottom), removal: .move(edge: .trailing)))
+                .transition(.asymmetric(
+                    insertion: .move( edge: .bottom),
+                    removal: .move( edge: .trailing)))
         } else {
-            VStack(spacing: 12) {
+            VStack(spacing: 24) {
                 Button("20 intervals") {
                     currentGame = GameData(questionTarget: 20, instrumentName: glop.selectedInstrumentName)
                     withAnimation {
@@ -52,11 +53,19 @@ struct ContentView: View {
                         showingGame = true
                     } //wa
                 } //btn
-                SettingsView()
+                //SettingsView()
+                Divider()
+                Button("Show settings") {
+                    self.showingSettings = true
+                } //btn
+                .sheet(isPresented: $showingSettings) {
+                    SettingsSheet()
+                } //sheet
             } //vs
-            //.frame(maxWidth: .infinity, maxHeight: .infinity)
-            //.background(.red)
-            .transition(.asymmetric(insertion: .move(edge: .bottom), removal: .move(edge: .trailing)))
+            .font(.title.bold())
+            .transition(.asymmetric(
+                insertion: .move( edge: .bottom),
+                removal: .move( edge: .trailing)))
         } //ife
     } //body
 } //str

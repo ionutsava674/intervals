@@ -200,7 +200,7 @@ class GameData: ObservableObject {
     } //func
     func playNow(root: Int, interval: Int) -> Void {
         let i = NoteInterval(rootNote: root, size: interval)
-        _ = self.selectedInstrument.playInterval(i, with: glop.intervalTime)
+        _ = self.selectedInstrument.playInterval(i, with: glop.getIntervalTime)
     } //func
     private func chooseNewRoot() {
         var newVal = Int.random(in: self.selectedInstrument.minNote ... self.selectedInstrument.maxIntervalRoot(for: chosenIntervalSize))

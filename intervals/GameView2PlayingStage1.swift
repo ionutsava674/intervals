@@ -27,9 +27,17 @@ struct GameView2PlayingStage1: View {
         VStack {
             Text("score \( gameData.correctGuessCounter ) / \( gameData.questionCounter )")
             HStack {
-                Button("  ") {
+                Button {
                     gameData.actionPlayChosen()
+                } label: {
+                    Image(systemName: "play.circle.fill")
+                        .padding()
+                        .accessibilityLabel("  ")
+                        .accessibilityValue("  ")
                 } //btn
+                //.accessibilityElement(children: .ignore)
+                .accessibilityLabel("  ")
+                .accessibilityValue("  ")
                 .padding()
                 .accessibilityFocused($playFocused)
             } //hs
@@ -48,16 +56,16 @@ struct GameView2PlayingStage1: View {
                 ForEach(0..<4) {row in
                     HStack {
                         ForEach(0..<3) {col in
-                            Button {
+                            Button { //keypad button
                                 let semitones = 1 + 3 * row + col
                                 guard gameData.isGuessingState else {
                                     let newRoot = glop.randomizeRootEachPlay
                                     ? Int.random(in: gameData.selectedInstrument.minNote ... gameData.selectedInstrument.maxIntervalRoot(for: semitones))
                                     : gameData.chosenRoot
-                                    gameData.playNow(root: newRoot, interval: semitones)
+                                    gameData.playNow( root: newRoot, interval: semitones)
                                     return
                                 } //gua
-                                gameData.actionGuess(interval: semitones)
+                                gameData.actionGuess( interval: semitones)
                                 correctFocused = true
                             } label: {
                                 VStack {
