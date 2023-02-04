@@ -72,6 +72,7 @@ struct SettingsSheet: View {
                     } label: {
                         Text("Instrument")
                     } //pk
+                    //.pickerStyle(.menu)
                     .padding(.horizontal)
                 } //hs
                 Divider()

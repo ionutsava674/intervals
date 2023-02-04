@@ -31,11 +31,26 @@ struct GameView2Revisit: View {
             Gauge(value: Float( ( gameData.isGuessingState ? 0 : 1 ) + (gameData.revisitationCurrentIndex ?? 0)), in: 0.0 ... Float(gameData.revisitationQuestions.count)) {
                 Text("question \(1 + (gameData.revisitationCurrentIndex ?? -1)) of \( gameData.revisitationQuestions.count )")
             } //ga
-            Button("  ") {
-                gameData.actionPlayCurrentRevisitation()
-            } //btn
-            .padding()
-            .accessibilityFocused($playFocused)
+            .font(.title.bold())
+            HStack {
+Text("  ")
+                    .accessibilityLabel(Text("The next item is the play button"))
+                Button {
+                    gameData.actionPlayCurrentRevisitation()
+                } label: {
+                    Image(systemName: gameData.isGuessingState ? "play.circle.fill" : "headphones")
+                    //Image(systemName: "play.circle.fill")
+                        .padding()
+                        .accessibilityLabel("  ")
+                        .accessibilityValue("  ")
+                } //btn
+                .accessibilityAddTraits(.playsSound)
+                .accessibilityRemoveTraits(.isButton)
+                .accessibilityLabel("  ")
+                .accessibilityValue("  ")
+                .padding()
+                .accessibilityFocused($playFocused)
+            } //hs
             Button(correctBtnTitle) {
                 guard gameData.isGuessingState else {
                     gameData.actionAcknowledgeRevisitation()
@@ -43,6 +58,7 @@ struct GameView2Revisit: View {
                     return
                 } //gua
             } //btn
+            .font(.title)
             .accessibilityFocused($correctFocused)
             .disabled(gameData.isGuessingState)
             Divider()
@@ -74,12 +90,14 @@ struct GameView2Revisit: View {
                                 } //vs
                                     .accessibilityElement(children: .combine)
                             } //btn
-                            //.padding()
+                            .accessibilityAddTraits(.playsSound)
+                            .accessibilityRemoveTraits(.isButton)
                         } //fe
                     } //hs
                 } //fe
             } //vs
         } //vs
+        .font(.headline)
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.45) {
                 self.playFocused = true

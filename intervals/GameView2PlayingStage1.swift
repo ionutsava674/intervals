@@ -26,20 +26,25 @@ struct GameView2PlayingStage1: View {
     var body: some View {
         VStack {
             Text("score \( gameData.correctGuessCounter ) / \( gameData.questionCounter )")
+                .font(.title.bold())
             HStack {
+Text("  ")
+                    .accessibilityLabel(Text("The next item is the play button"))
                 Button {
                     gameData.actionPlayChosen()
                 } label: {
-                    Image(systemName: "play.circle.fill")
+                    Image(systemName: gameData.isGuessingState ? "play.circle.fill" : "headphones")
                         .padding()
                         .accessibilityLabel("  ")
                         .accessibilityValue("  ")
                 } //btn
-                //.accessibilityElement(children: .ignore)
                 .accessibilityLabel("  ")
                 .accessibilityValue("  ")
                 .padding()
                 .accessibilityFocused($playFocused)
+                .accessibilityAddTraits(.playsSound)
+                .accessibilityRemoveTraits(.isButton)
+
             } //hs
             Button(correctBtnTitle) {
                 guard gameData.isGuessingState else {
@@ -47,8 +52,8 @@ struct GameView2PlayingStage1: View {
                     playFocused = true
                     return
                 } //gua
-                //guess(interval: 0)
             } //btn
+            .font(.title)
             .accessibilityFocused($correctFocused)
             .disabled(gameData.isGuessingState)
             Divider()
@@ -77,7 +82,8 @@ struct GameView2PlayingStage1: View {
                                 } //vs
                                     .accessibilityElement(children: .combine)
                             } //btn
-                            //.padding()
+                            .accessibilityAddTraits(.playsSound)
+                            .accessibilityRemoveTraits(.isButton)
                         } //fe
                     } //hs
                 } //fe
@@ -91,6 +97,7 @@ struct GameView2PlayingStage1: View {
                 } //btn
             } //if
         } //vs
+        .font(.headline)
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.45) {
                 self.playFocused = true
