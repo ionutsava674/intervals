@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C61EA1D829477723005A43C7 /* sfx2 in Resources */ = {isa = PBXBuildFile; fileRef = C61EA1D729477723005A43C7 /* sfx2 */; };
+		C6216B8A299152800036BE71 /* AccessActi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6216B89299152800036BE71 /* AccessActi.swift */; };
 		C6238CBA294F9DB20049218F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6238CB9294F9DB20049218F /* SettingsView.swift */; };
 		C6A4B33B2947A6D900CEA07B /* groupedAsync.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A4B33A2947A6D900CEA07B /* groupedAsync.swift */; };
 		C6A5A6FC294C63290009D096 /* GameData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A5A6FB294C63290009D096 /* GameData.swift */; };
@@ -28,6 +29,7 @@
 
 /* Begin PBXFileReference section */
 		C61EA1D729477723005A43C7 /* sfx2 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = sfx2; sourceTree = "<group>"; };
+		C6216B89299152800036BE71 /* AccessActi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessActi.swift; sourceTree = "<group>"; };
 		C6238CB9294F9DB20049218F /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		C6A4B33A2947A6D900CEA07B /* groupedAsync.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = groupedAsync.swift; sourceTree = "<group>"; };
 		C6A5A6FB294C63290009D096 /* GameData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameData.swift; sourceTree = "<group>"; };
@@ -81,6 +83,7 @@
 				C6E27B14294908AE009948FB /* PreferencesClass.swift */,
 				C6B9792D29911374007682EA /* IconChanger.swift */,
 				C6F34FCD2947586C00611240 /* ContentView.swift */,
+				C6216B89299152800036BE71 /* AccessActi.swift */,
 				C6F62794294EF69900ADB0FE /* GameViewV2.swift */,
 				C6F62796294F19D900ADB0FE /* GameView2PlayingStage1.swift */,
 				C6F62798294F19FA00ADB0FE /* GameView2Summary.swift */,
@@ -177,6 +180,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C6216B8A299152800036BE71 /* AccessActi.swift in Sources */,
 				C6E27B132948CFCE009948FB /* Instrument.swift in Sources */,
 				C6F34FCE2947586C00611240 /* ContentView.swift in Sources */,
 				C6C4D118297ED1B800610E68 /* SettingsSheet.swift in Sources */,

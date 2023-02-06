@@ -11,9 +11,9 @@ import SwiftUI
 class GlobalPreferences2: ObservableObject {
     @AppStorage("maxSizeToRandomize") var maxSizeToRandomize = 4
     @AppStorage("randomizeRootEachPlay") var randomizeRootEachPlay = false
-    @AppStorage("changeRootEveryIntervalChange") var changeRootEveryIntervalChange = false
+    @AppStorage("changeRootEveryIntervalChange") var changeRootEveryIntervalChange = true
     @AppStorage("newIntervalMustBeDifferent") var newIntervalMustBeDifferent = true
-    @AppStorage("intervalTimeSelection") var intervalTimeSelection: Int = 0
+    @AppStorage("intervalTimeSelection") var intervalTimeSelection: Int = 4
     var getIntervalTime: Double {
         Self.availableIntervalTimes[ intervalTimeSelection]
     } //cv
@@ -32,17 +32,17 @@ class GlobalPreferences2: ObservableObject {
     func restoreDefaults() -> Void {
         maxSizeToRandomize = 4
         randomizeRootEachPlay = false
-        changeRootEveryIntervalChange = false
+        changeRootEveryIntervalChange = true
         newIntervalMustBeDifferent = true
-        intervalTimeSelection = 0
+        intervalTimeSelection = 4
         selectedInstrumentName = ""
     } //func
     func valuesAreDefaults() -> Bool {
         maxSizeToRandomize == 4
         && randomizeRootEachPlay == false
-        && changeRootEveryIntervalChange == false
+        && changeRootEveryIntervalChange == true
         && newIntervalMustBeDifferent == true
-        && intervalTimeSelection == 0
+        && intervalTimeSelection == 4
         && selectedInstrumentName == ""
         //&& intervalTime == 0.6666
     } //func
