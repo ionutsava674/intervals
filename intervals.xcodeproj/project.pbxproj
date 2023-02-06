@@ -11,6 +11,7 @@
 		C6238CBA294F9DB20049218F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6238CB9294F9DB20049218F /* SettingsView.swift */; };
 		C6A4B33B2947A6D900CEA07B /* groupedAsync.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A4B33A2947A6D900CEA07B /* groupedAsync.swift */; };
 		C6A5A6FC294C63290009D096 /* GameData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A5A6FB294C63290009D096 /* GameData.swift */; };
+		C6B9792E29911374007682EA /* IconChanger.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B9792D29911374007682EA /* IconChanger.swift */; };
 		C6C4D118297ED1B800610E68 /* SettingsSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C4D117297ED1B800610E68 /* SettingsSheet.swift */; };
 		C6E27B132948CFCE009948FB /* Instrument.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6E27B122948CFCE009948FB /* Instrument.swift */; };
 		C6E27B15294908AE009948FB /* PreferencesClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6E27B14294908AE009948FB /* PreferencesClass.swift */; };
@@ -30,6 +31,7 @@
 		C6238CB9294F9DB20049218F /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		C6A4B33A2947A6D900CEA07B /* groupedAsync.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = groupedAsync.swift; sourceTree = "<group>"; };
 		C6A5A6FB294C63290009D096 /* GameData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameData.swift; sourceTree = "<group>"; };
+		C6B9792D29911374007682EA /* IconChanger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconChanger.swift; sourceTree = "<group>"; };
 		C6C4D117297ED1B800610E68 /* SettingsSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSheet.swift; sourceTree = "<group>"; };
 		C6E27B122948CFCE009948FB /* Instrument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Instrument.swift; sourceTree = "<group>"; };
 		C6E27B14294908AE009948FB /* PreferencesClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesClass.swift; sourceTree = "<group>"; };
@@ -77,6 +79,7 @@
 			children = (
 				C6F34FCB2947586C00611240 /* intervalsApp.swift */,
 				C6E27B14294908AE009948FB /* PreferencesClass.swift */,
+				C6B9792D29911374007682EA /* IconChanger.swift */,
 				C6F34FCD2947586C00611240 /* ContentView.swift */,
 				C6F62794294EF69900ADB0FE /* GameViewV2.swift */,
 				C6F62796294F19D900ADB0FE /* GameView2PlayingStage1.swift */,
@@ -179,6 +182,7 @@
 				C6C4D118297ED1B800610E68 /* SettingsSheet.swift in Sources */,
 				C6F6279B294F1A1900ADB0FE /* GameView2Revisit.swift in Sources */,
 				C6A4B33B2947A6D900CEA07B /* groupedAsync.swift in Sources */,
+				C6B9792E29911374007682EA /* IconChanger.swift in Sources */,
 				C6F62799294F19FA00ADB0FE /* GameView2Summary.swift in Sources */,
 				C6F34FCC2947586C00611240 /* intervalsApp.swift in Sources */,
 				C6A5A6FC294C63290009D096 /* GameData.swift in Sources */,
@@ -312,6 +316,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"intervals/Preview Content\"";
@@ -342,6 +347,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"intervals/Preview Content\"";

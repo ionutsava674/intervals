@@ -30,6 +30,7 @@ struct ContentView: View {
                     removal: .move( edge: .trailing)))
         } else {
             VStack(spacing: 24) {
+                //IconChangeView()
                 Text("Begin new round:")
                     .font(.largeTitle.bold())
                 Divider()
