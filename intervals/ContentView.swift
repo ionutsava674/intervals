@@ -9,13 +9,14 @@ import SwiftUI
 
 struct ContentView: View {
     @ObservedObject private var glop = GlobalPreferences2.global
-    @State private var currentGame: GameData = GameData(questionTarget: 0, instrumentName: GlobalPreferences2.global.selectedInstrumentName)
+    @State private var currentGame: GameDataV3 = GameDataV3(questionTargetCount: 0, instrumentName: GlobalPreferences2.global.selectedInstrumentName)
+
     @State private var showingGame = false
     @State private var showingAcc = false
     @State private var showingSettings = false
     var body: some View {
         if showingGame {
-            GameViewV2(gameData:  self.currentGame, keepAlive: $showingGame )
+            GameViewV3(gameData:  self.currentGame, keepAlive: $showingGame )
             /*
             Button("close") {
                 withAnimation(.easeIn(duration: 4)) {
@@ -35,25 +36,25 @@ struct ContentView: View {
                     .font(.largeTitle.bold())
                 Divider()
                 Button("20 intervals") {
-                    currentGame = GameData(questionTarget: 20, instrumentName: glop.selectedInstrumentName)
+                    currentGame = GameDataV3(questionTargetCount: 2, instrumentName: glop.selectedInstrumentName)
                     withAnimation {
                         showingGame = true
                     } //wa
                 } //btn
                 Button("50 intervals") {
-                    currentGame = GameData(questionTarget: 50, instrumentName: glop.selectedInstrumentName)
+                    currentGame = GameDataV3(questionTargetCount: 50, instrumentName: glop.selectedInstrumentName)
                     withAnimation {
                         showingGame = true
                     } //wa
                 } //btn
                 Button("100 intervals") {
-                    currentGame = GameData(questionTarget: 100, instrumentName: glop.selectedInstrumentName)
+                    currentGame = GameDataV3(questionTargetCount: 100, instrumentName: glop.selectedInstrumentName)
                     withAnimation {
                         showingGame = true
                     } //wa
                 } //btn
                 Button("no limit game") {
-                    currentGame = GameData(questionTarget: 0, instrumentName: glop.selectedInstrumentName)
+                    currentGame = GameDataV3(questionTargetCount: 0, instrumentName: glop.selectedInstrumentName)
                     withAnimation {
                         showingGame = true
                     } //wa

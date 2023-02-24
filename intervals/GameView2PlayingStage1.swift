@@ -7,31 +7,37 @@
 
 import SwiftUI
 
-struct GameView2PlayingStage1: View {
+struct GameView3PlayingStage1: View {
     @ObservedObject private var glop = GlobalPreferences2.global
-    @ObservedObject var gameData: GameData
+    @ObservedObject var gameData: GameDataV3
     @Binding var keepAlive: Bool
-    
+
     @AccessibilityFocusState private var playFocused: Bool
     @AccessibilityFocusState private var correctFocused: Bool
 
-    var correctBtnTitle: String {
-        guard !gameData.isGuessingState else {
-            return "guess the interval"
-        } //gua
-        return gameData.currentGuess == gameData.chosenIntervalSize
-        ? "correct (\(gameData.chosenIntervalSize))"
-        : "wrong (\(gameData.chosenIntervalSize))"
+    var statusText1: String {
+        if gameData.isGuessingState {
+            return gameData.canGuessAnswer
+            ? "how many semitones are in the interval?"
+            : "Tap Play to hear the interval, then you can enter your answer"
+        } else {
+            return gameData.currentAnsweredCorrectly
+            ? "correct - \(gameData.correctAnswer)"
+            : "Wrong answer. The correct answer was \(gameData.correctAnswer)"
+        } //else
     } //cv
     var body: some View {
         VStack {
-            Text("score \( gameData.correctGuessCounter ) / \( gameData.questionCounter )")
-                .font(.title.bold())
+            Text("Question \( gameData.currentQuestionIndex + 1 ) / \( gameData.questionList.count )")
+            Text("Score \( gameData.correctlyAnsweredQuestions.count ) / \( gameData.answeredQuestions.count )")
+                //.font(.title.bold())
             HStack {
 Text("  ")
                     .accessibilityLabel(Text("The next item is the play button"))
                 Button {
-                    gameData.actionPlayChosen()
+                    withAnimation {
+                        gameData.actionPlay()
+                    }
                 } label: {
                     Image(systemName: gameData.isGuessingState ? "play.circle.fill" : "headphones")
                         .padding()
@@ -44,51 +50,67 @@ Text("  ")
                 .accessibilityFocused($playFocused)
                 .accessibilityAddTraits(.playsSound)
                 .accessibilityRemoveTraits(.isButton)
-
             } //hs
-            Button(correctBtnTitle) {
-                guard gameData.isGuessingState else {
-                    gameData.actionAcknowledgeAndReset()
-                    playFocused = true
-                    return
-                } //gua
-            } //btn
-            .font(.title)
-            .accessibilityFocused($correctFocused)
-            .disabled(gameData.isGuessingState)
+                Text(statusText1)
+                .onTapGesture {
+                    withAnimation {
+                        gameData.actionNextQuestion()
+                        playFocused = true
+                    }
+                } //tap
+                .accessibilityFocused($correctFocused)
+            if !gameData.isGuessingState {
+                Button("Continue") {
+                    withAnimation {
+                        gameData.actionNextQuestion()
+                        playFocused = true
+                    }
+                } //btn
+                .font(.title)
+                .disabled( gameData.isGuessingState)
+                .padding()
+                Text("You can now tap a number to listen and compare")
+            } //if
             Divider()
-            VStack {
-                ForEach(0..<4) {row in
-                    HStack {
-                        ForEach(0..<3) {col in
-                            Button { //keypad button
-                                let semitones = 1 + 3 * row + col
-                                guard gameData.isGuessingState else {
-                                    let newRoot = glop.randomizeRootEachPlay
-                                    ? Int.random(in: gameData.selectedInstrument.minNote ... gameData.selectedInstrument.maxIntervalRoot(for: semitones))
-                                    : gameData.chosenRoot
-                                    gameData.playNow( root: newRoot, interval: semitones)
-                                    return
-                                } //gua
-                                gameData.actionGuess( interval: semitones)
-                                correctFocused = true
-                            } label: {
-                                VStack {
-                                    Text( gameData.isGuessingState
-                                          ? "\( 1 + row * 3 + col )"
-                                          : ("🎧 \( 1 + row * 3 + col )") )
-                                        .padding()
-                                        .frame(maxWidth: .infinity)
-                                } //vs
-                                    .accessibilityElement(children: .combine)
-                            } //btn
-                            .accessibilityAddTraits(.playsSound)
-                            .accessibilityRemoveTraits(.isButton)
-                        } //fe
-                    } //hs
-                } //fe
-            } //vs
-            if gameData.questionTarget == 0 {
+            if gameData.canGuessAnswer {
+                VStack {
+                    Button { //keypad button
+                        padTap(0)
+                    } label: {
+                        VStack {
+                            Text( gameData.isGuessingState
+                                  ? "0 (same note)"
+                                  : "🎧 0 (same note)" )
+                            .padButtonInnerText()
+                        } //vs
+                            .accessibilityElement(children: .combine)
+                    } //btn
+                    .padButtonStyle()
+                    ForEach(0..<4) {row in
+                        HStack {
+                            ForEach(0..<3) {col in
+                                Button { //keypad button
+                                    let semitones = 1 + 3 * row + col
+                                    padTap( semitones)
+                                } label: {
+                                    VStack {
+                                        Text( gameData.isGuessingState
+                                              ? "\( 1 + row * 3 + col )"
+                                              : ("🎧 \( 1 + row * 3 + col )") )
+                                        .padButtonInnerText()
+                                    } //vs
+                                        .accessibilityElement(children: .combine)
+                                } //btn
+                                .padButtonStyle()
+                            } //fe
+                        } //hs
+                    } //fe
+                } //vs
+                .frame(maxWidth: 350)
+                .transition(.move(edge: .bottom) )
+            } //if
+            /*
+            if gameData.limi {
                 Button {
                     gameData.fromPlayingToSummary()
                 } label: {
@@ -96,6 +118,7 @@ Text("  ")
                         .padding()
                 } //btn
             } //if
+             */
         } //vs
         .font(.headline)
         .onAppear {
@@ -104,4 +127,30 @@ Text("  ")
             }
         } //app
     } //body
+    func padTap(_ interval: Int) {
+        if gameData.isGuessingState {
+            gameData.actionGuess(interval)
+            correctFocused = true
+        } else {
+            gameData.actionCustomPlay( interval)
+        } //else
+    } //func
 } //str
+
+extension View {
+    func padButtonStyle() -> some View {
+        self
+            .accessibilityAddTraits(.playsSound)
+            .accessibilityRemoveTraits(.isButton)
+            .background( Color(uiColor: .secondarySystemBackground) )
+            .clipShape( RoundedRectangle(cornerRadius: 8))
+            .overlay(.gray, in: RoundedRectangle(cornerRadius: 8).stroke(lineWidth: 2))
+            .padding(3)
+    } //func
+    func padButtonInnerText() -> some View {
+        self
+            .font(.title)
+                .padding()
+                .frame(maxWidth: .infinity)
+    } //func
+} //ext

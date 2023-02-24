@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 
 class GlobalPreferences2: ObservableObject {
+    @AppStorage("onlyAscending") var onlyAscending = false
     @AppStorage("maxSizeToRandomize") var maxSizeToRandomize = 4
     @AppStorage("randomizeRootEachPlay") var randomizeRootEachPlay = false
     @AppStorage("changeRootEveryIntervalChange") var changeRootEveryIntervalChange = true
@@ -30,6 +31,7 @@ class GlobalPreferences2: ObservableObject {
     static let global = GlobalPreferences2()
     
     func restoreDefaults() -> Void {
+        onlyAscending = false
         maxSizeToRandomize = 4
         randomizeRootEachPlay = false
         changeRootEveryIntervalChange = true
@@ -38,7 +40,8 @@ class GlobalPreferences2: ObservableObject {
         selectedInstrumentName = ""
     } //func
     func valuesAreDefaults() -> Bool {
-        maxSizeToRandomize == 4
+        onlyAscending == false
+        && maxSizeToRandomize == 4
         && randomizeRootEachPlay == false
         && changeRootEveryIntervalChange == true
         && newIntervalMustBeDifferent == true

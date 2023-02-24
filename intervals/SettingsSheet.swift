@@ -19,70 +19,88 @@ struct SettingsSheet: View {
             GlobalPreferences2.availableInstruments[$0]?.name ?? "" < GlobalPreferences2.availableInstruments[$1]?.name ?? ""
         })
     } //cv
-    var body: some View {
-        //NavigationView {
-        VStack(spacing: 20) {
-            Button {
-                //premo.wrappedValue.dismiss()
-                dismiss()
-            } label: {
-                Text("Close")
-                    .font(.title.bold())
-                    .padding()
-            } //btn
-                    //Form {
-            VStack(alignment: .leading, spacing: 10) {
-                        Toggle("new interval must be different", isOn: $glop.newIntervalMustBeDifferent)
-                            .padding(.horizontal)
-                        Toggle("change root when changing interval", isOn: $glop.changeRootEveryIntervalChange)
-                            .padding(.horizontal)
-                        Toggle("randomize root each time the interval is played", isOn: $glop.randomizeRootEachPlay)
-                            .padding(.horizontal)
 
-                HStack {
-                    Text("max interval size")
-                        .accessibilityHidden(true)
-                    Picker("max interval size", selection: $glop.maxSizeToRandomize) {
-                        ForEach(2..<13, id: \.self) {
-                            Text("\($0) semitones")
-                        } //fe
-                    } //pk
-                    .padding(.horizontal)
-                    .labelStyle(.iconOnly)
-                } //hs
-                HStack {
-                    Text("interval time")
-                        .accessibilityHidden(true)
-                    Picker("interval time", selection: $glop.intervalTimeSelection) {
-                        ForEach(GlobalPreferences2.availableIntervalTimes.indices, id: \.self) {
-                            let val = GlobalPreferences2.availableIntervalTimes[$0]
-                            Text("\(val.toString(2)) s, \((60.0 / val).toString(2)) bpm")
-                        } //fe
-                    } //pk
-                    .padding(.horizontal)
-                    .labelsHidden()
-                } //hs
-                HStack {
-                    Text("Instrument")
-                        .accessibilityHidden(true)
-                    Picker(selection: $glop.selectedInstrumentName) {
-                        ForEach(instrumentsSortedKeys, id: \.self) {
-                            Text(GlobalPreferences2.availableInstruments[$0]?.name ?? "")
-                        } //fe
-                    } label: {
+    var body: some View {
+        ScrollView {
+            VStack(spacing: 20) {
+                Button {
+                    //premo.wrappedValue.dismiss()
+                    dismiss()
+                } label: {
+                    Text("Close")
+                        .font(.title.bold())
+                        .padding()
+                } //btn
+                VStack(alignment: .leading, spacing: 10) {
+                    Group {
+                    Toggle("new interval must be different", isOn: $glop.newIntervalMustBeDifferent)
+                        .padding(.horizontal)
+                    Text("Every new interval that is generated, will always be different than the last one.")
+                    Divider()
+                    Toggle("change root when changing interval", isOn: $glop.changeRootEveryIntervalChange)
+                        .padding(.horizontal)
+                    Text("Every new interval will start with a different note.")
+                    Divider()
+                    Toggle("randomize root each time the interval is played", isOn: $glop.randomizeRootEachPlay)
+                        .padding(.horizontal)
+                    Text("Each time the Play button is pressed, the same interval will be played but starting from a different note.")
+                    Divider()
+                    } //gr
+
+                    Group {
+                    HStack {
+                        Text("max interval size")
+                            .accessibilityHidden(true)
+                        Picker("max interval size", selection: $glop.maxSizeToRandomize) {
+                            ForEach(2..<13, id: \.self) {
+                                Text("\($0) semitones")
+                            } //fe
+                        } //pk
+                        .padding(.horizontal)
+                        .labelStyle(.iconOnly)
+                    } //hs
+                    Text("The maximum number of semitones when giving new intervals.")
+                    Divider()
+                        Toggle("Only allow ascending intervals", isOn: $glop.onlyAscending)
+                        Text("If you want to get only ascending intervals, or both ascending and descending.")
+                        Divider()
+                    HStack {
+                        Text("interval time")
+                            .accessibilityHidden(true)
+                        Picker("interval time", selection: $glop.intervalTimeSelection) {
+                            ForEach(GlobalPreferences2.availableIntervalTimes.indices, id: \.self) {
+                                let val = GlobalPreferences2.availableIntervalTimes[$0]
+                                Text("\(val.toString(2)) s, \((60.0 / val).toString(2)) bpm")
+                            } //fe
+                        } //pk
+                        .padding(.horizontal)
+                        .labelsHidden()
+                    } //hs
+                        Text("The time duration between the notes played.")
+                        Divider()
+                    } //gr
+                    HStack {
                         Text("Instrument")
-                    } //pk
-                    //.pickerStyle(.menu)
-                    .padding(.horizontal)
-                } //hs
-                Divider()
-                        Button("Restore defaults") {
-                            glop.restoreDefaults()
-                        } //btn
-                        .disabled( glop.valuesAreDefaults())
-                    } //form vs
-            Spacer()
-        } //vs
+                            .accessibilityHidden(true)
+                        Picker(selection: $glop.selectedInstrumentName) {
+                            ForEach(instrumentsSortedKeys, id: \.self) {
+                                Text(GlobalPreferences2.availableInstruments[$0]?.name ?? "")
+                            } //fe
+                        } label: {
+                            Text("Instrument")
+                        } //pk
+                        //.pickerStyle(.menu)
+                        .padding(.horizontal)
+                    } //hs
+                    Divider()
+                    Button("Restore defaults") {
+                        glop.restoreDefaults()
+                    } //btn
+                    .disabled( glop.valuesAreDefaults())
+                } //form vs
+                Spacer()
+            } //vs
+        } //sv
         .frame(maxWidth: 500)
         //.accessibilityLabel("Settings")
     } //body

@@ -7,18 +7,18 @@
 
 import SwiftUI
 
-struct GameViewV2: View {
-    @ObservedObject var gameData: GameData
+struct GameViewV3: View {
+    @ObservedObject var gameData: GameDataV3
     @Binding var keepAlive: Bool
+
     var body: some View {
         VStack {
             switch gameData.gameState {
             case .playing:
-                GameView2PlayingStage1(gameData: gameData, keepAlive: $keepAlive)
+                GameView3PlayingStage1(gameData: gameData, keepAlive: $keepAlive)
             case .summary:
-                GameView2Summary(gameData: gameData, keepAlive: $keepAlive)
-            case .revisiting:
-                GameView2Revisit(gameData: gameData, keepAlive: $keepAlive)
+                GameView3Summary( gameData: gameData, keepAlive: $keepAlive)
+                //EmptyView()
             } //swi
             Button("Close game") {
                 withAnimation {
