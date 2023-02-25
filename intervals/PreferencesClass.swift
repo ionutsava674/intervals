@@ -10,7 +10,7 @@ import SwiftUI
 
 class GlobalPreferences2: ObservableObject {
     @AppStorage("shorterTexts") var shorterTexts = false
-    @AppStorage("onlyAscending") var onlyAscending = false
+    @AppStorage("onlyAscending") var onlyAscending = true
     @AppStorage("maxSizeToRandomize") var maxSizeToRandomize = 4
     @AppStorage("randomizeRootEachPlay") var randomizeRootEachPlay = false
     @AppStorage("changeRootEveryIntervalChange") var changeRootEveryIntervalChange = true
@@ -33,7 +33,7 @@ class GlobalPreferences2: ObservableObject {
     
     func restoreDefaults() -> Void {
         shorterTexts = false
-        onlyAscending = false
+        onlyAscending = true
         maxSizeToRandomize = 4
         randomizeRootEachPlay = false
         changeRootEveryIntervalChange = true
@@ -43,7 +43,7 @@ class GlobalPreferences2: ObservableObject {
     } //func
     func valuesAreDefaults() -> Bool {
         shorterTexts == false
-        && onlyAscending == false
+        && onlyAscending == true
         && maxSizeToRandomize == 4
         && randomizeRootEachPlay == false
         && changeRootEveryIntervalChange == true
