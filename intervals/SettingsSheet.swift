@@ -21,7 +21,7 @@ struct SettingsSheet: View {
     } //cv
 
     var body: some View {
-        ScrollView {
+        ScrollView([.vertical], showsIndicators: true) {
             VStack(spacing: 20) {
                 Button {
                     //premo.wrappedValue.dismiss()

@@ -31,8 +31,17 @@ struct ContentView: View {
                     removal: .move( edge: .trailing)))
         } else {
             VStack(alignment: .center, spacing: 30) {
-                Text("Intervals")
-                    .font(.largeTitle.bold())
+                HStack(alignment: .center, spacing: 8) {
+                    Image(uiImage: UIImage(named: "AppIcon") ?? UIImage())
+                        .resizable()
+                        .frame(width: 48, height: 48, alignment: .center)
+                        .clipShape(RoundedRectangle(cornerRadius: 4))
+                    Text("Welcome to Intervals")
+                        .font(.largeTitle.bold())
+                        .multilineTextAlignment(.leading)
+                        //.lin
+                } //hs
+                Divider()
                 VStack(spacing: 18) {
                     //IconChangeView()
                     Text("Begin a new round of:")

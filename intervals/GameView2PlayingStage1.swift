@@ -44,9 +44,16 @@ struct GameView3PlayingStage1: View {
     } //cv
     var body: some View {
         VStack {
-            Text("Question \( gameData.currentQuestionIndex + 1 ) / \( gameData.questionList.count )")
-            Text("Score \( gameData.correctlyAnsweredQuestions.count ) / \( gameData.answeredQuestions.count )")
-                //.font(.title.bold())
+            HStack(alignment: .top, spacing: 12) {
+                VStack(alignment: .trailing, spacing: 6) {
+                    Text("Question \( gameData.currentQuestionIndex + 1 ) / \( gameData.questionList.count )")
+                    Text("Score: \( gameData.correctlyAnsweredQuestions.count ) / \( gameData.answeredQuestions.count )")
+                        //.font(.title.bold())
+                } //vs6
+                Gauge(value: gameData.currentQuestionIndex, in: 0...gameData.questionList.count) {
+                    Text("question \(gameData.currentQuestionIndex + 1)")
+                }
+            } //hs
             HStack {
 Text("  ")
                     .accessibilityLabel(Text("The next item is the play button"))
