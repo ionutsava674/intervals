@@ -30,43 +30,41 @@ struct ContentView: View {
                     insertion: .move( edge: .bottom),
                     removal: .move( edge: .trailing)))
         } else {
-            VStack(spacing: 24) {
-                //IconChangeView()
-                Text("Begin new round:")
+            VStack(alignment: .center, spacing: 30) {
+                Text("Intervals")
                     .font(.largeTitle.bold())
-                Divider()
-                Button("20 intervals") {
-                    currentGame = GameDataV3(questionTargetCount: 2, instrumentName: glop.selectedInstrumentName)
-                    withAnimation {
-                        showingGame = true
-                    } //wa
-                } //btn
-                Button("50 intervals") {
-                    currentGame = GameDataV3(questionTargetCount: 50, instrumentName: glop.selectedInstrumentName)
-                    withAnimation {
-                        showingGame = true
-                    } //wa
-                } //btn
-                Button("100 intervals") {
-                    currentGame = GameDataV3(questionTargetCount: 100, instrumentName: glop.selectedInstrumentName)
-                    withAnimation {
-                        showingGame = true
-                    } //wa
-                } //btn
-                Button("no limit game") {
-                    currentGame = GameDataV3(questionTargetCount: 0, instrumentName: glop.selectedInstrumentName)
-                    withAnimation {
-                        showingGame = true
-                    } //wa
-                } //btn
-                //SettingsView()
-                Divider()
+                VStack(spacing: 18) {
+                    //IconChangeView()
+                    Text("Begin a new round of:")
+                        .font(.title.bold())
+                    Button("20 intervals") {
+                        currentGame = GameDataV3(questionTargetCount: 2, instrumentName: glop.selectedInstrumentName)
+                        withAnimation {
+                            showingGame = true
+                        } //wa
+                    } //btn
+                    Button("50 intervals") {
+                        currentGame = GameDataV3(questionTargetCount: 50, instrumentName: glop.selectedInstrumentName)
+                        withAnimation {
+                            showingGame = true
+                        } //wa
+                    } //btn
+                    Button("100 intervals") {
+                        currentGame = GameDataV3(questionTargetCount: 100, instrumentName: glop.selectedInstrumentName)
+                        withAnimation {
+                            showingGame = true
+                        } //wa
+                    } //btn
+                    Button("no limit game") {
+                        currentGame = GameDataV3(questionTargetCount: 0, instrumentName: glop.selectedInstrumentName)
+                        withAnimation {
+                            showingGame = true
+                        } //wa
+                    } //btn
+                } //vs 18
                 Button("Show settings") {
                     self.showingSettings = true
                 } //btn
-                .sheet(isPresented: $showingSettings) {
-                    SettingsSheet()
-                } //sheet
                 if UIAccessibility.isVoiceOverRunning {
                     Button("Accessibility") {
                         self.showingAcc = true
@@ -74,8 +72,11 @@ struct ContentView: View {
                     .sheet(isPresented: $showingAcc) {
                         AccessActi()
                     } //sheet
-                } //if
-            } //vs
+                } //if ax
+            } //vs30
+                .sheet(isPresented: $showingSettings) {
+                    SettingsSheet()
+                } //sheet
             .font(.title.bold())
             .transition(.asymmetric(
                 insertion: .move( edge: .bottom),

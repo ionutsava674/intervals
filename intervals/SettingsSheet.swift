@@ -93,13 +93,29 @@ struct SettingsSheet: View {
                         .padding(.horizontal)
                     } //hs
                     Divider()
+                    Group {
+                        Text(" Verbosity:")
+                            .font(.title)
+                            .accessibility(addTraits: AccessibilityTraits.isHeader)
+                        Toggle("Use shorter texts and captions", isOn: $glop.shorterTexts)
+                        Text("For advanced players, navigation speed is greatly improved.")
+                        Divider()
+                    } //gr
                     Button("Restore defaults") {
                         glop.restoreDefaults()
                     } //btn
                     .disabled( glop.valuesAreDefaults())
-                } //form vs
-                Spacer()
-            } //vs
+                } //vs 10
+                //Spacer()
+                Button {
+                    //premo.wrappedValue.dismiss()
+                    dismiss()
+                } label: {
+                    Text("Close")
+                        .font(.title.bold())
+                        .padding()
+                } //btn
+            } //vs 20
         } //sv
         .frame(maxWidth: 500)
         //.accessibilityLabel("Settings")

@@ -32,7 +32,7 @@ class GameDataV3: ObservableObject {
     private let glop = GlobalPreferences2.global
     var selectedInstrument: InstrumentV3
 
-    private var limitlessGame: Bool
+    @Published private(set) var limitlessGame: Bool
     @Published var questionList: [Question]
     @Published var initialQuestions: [Question]
     @Published var completedQuestions: [Question]
@@ -43,9 +43,9 @@ class GameDataV3: ObservableObject {
     @Published var currentAnswer: Int?
     @Published var isGuessingState: Bool
 
-    @Published var startTime: Date
-    @Published var endTime: Date?
-    @Published var finalEndTime: Date?
+    @Published private(set) var startTime: Date
+    @Published private(set) var endTimes: [Date]
+    @Published private(set) var revisitationCount: Int
 
     enum GameStateType: Int {
         case playing, summary
@@ -70,13 +70,13 @@ class GameDataV3: ObservableObject {
         else {
             return ""
         } //gua
-        var after = "(same note)"
+        var after = "same note"
         if questionList[currentQuestionIndex].interval.size > 0 {
-            after = "(ascending)"
+            after = "ascending"
         } else if questionList[currentQuestionIndex].interval.size < 0 {
-            after = "(descending)"
+            after = "descending"
         }
-        return "\(Swift.abs( questionList[currentQuestionIndex].interval.size)) \(after)"
+        return "\(Swift.abs( questionList[currentQuestionIndex].interval.size)), (\(after))"
     } //cv
     var answeredQuestions: [Question] {
         questionList.answered
@@ -96,8 +96,8 @@ class GameDataV3: ObservableObject {
         let instData = GlobalPreferences2.availableInstruments[instrumentName] ?? ("", 0, 0)
         self.selectedInstrument = InstrumentV3(name: instrumentName, minNote: instData.minNote, maxNote: instData.maxNote)
 
-        self.endTime = nil
-        self.finalEndTime = nil
+        self.revisitationCount = 0
+        self.endTimes = []
         self.startTime = Date.now
 
         limitlessGame = (questionTargetCount == 0)
@@ -151,15 +151,18 @@ class GameDataV3: ObservableObject {
         currentAnswer = intervalSize
         isGuessingState = false
     } //func
-    func actionNextQuestion() -> Void {
+    func actionNextQuestion() -> Bool {
+        /// true if next question is retrieved
         guard questionsStarted,
               !isGuessingState else {
-            return
+            return false
         }
         if canFetchNewQuestion() {
             fetchNewQuestion()
+            return true
         } else {
             gotoSummary()
+            return false
         } //else
     } //func
     func actionRevisit() {
@@ -170,17 +173,26 @@ class GameDataV3: ObservableObject {
             q.timesPlayed = 0
             q.answer = nil
         } //fe
+        questionList.shuffle()
         limitlessGame = false
         questionsStarted = false
         gameState = .playing
+        revisitationCount += 1
         fetchNewQuestion()
     } //func
+    func actionGoDirectlyToSummary() {
+        gotoSummary()
+    } //func
     private func gotoSummary() {
-        finalEndTime = .now
+        endTimes.append(.now)
+        /*
         if endTime == nil {
-            endTime = finalEndTime
-        }
-        if initialQuestions.isEmpty {
+            endTime = .now
+        } else {
+            finalEndTime = .now
+        } //else
+         */
+        if  initialQuestions.isEmpty {
             initialQuestions = questionList.map({
                 Question(interval: $0.interval, answer: $0.answer, timesPlayed: $0.timesPlayed)
             })
@@ -218,7 +230,7 @@ class GameDataV3: ObservableObject {
         questionsStarted = true
         resetCurrentAnswer()
     } //func
-    private func canFetchNewQuestion() -> Bool {
+func canFetchNewQuestion() -> Bool {
         guard !limitlessGame else {
             return true
         } //gua

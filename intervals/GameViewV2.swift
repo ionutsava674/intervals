@@ -20,10 +20,12 @@ struct GameViewV3: View {
                 GameView3Summary( gameData: gameData, keepAlive: $keepAlive)
                 //EmptyView()
             } //swi
-            Button("Close game") {
+            Button {
                 withAnimation {
                     keepAlive = false
                 } //wa
+            } label: {
+                Text( gameData.gameState == .summary ? "Close game" : "Quit game" )
             } //btn
             .padding()
         } //vs
