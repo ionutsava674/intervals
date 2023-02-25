@@ -47,7 +47,7 @@ struct ContentView: View {
                     Text("Begin a new round of:")
                         .font(.title.bold())
                     Button("20 intervals") {
-                        currentGame = GameDataV3(questionTargetCount: 2, instrumentName: glop.selectedInstrumentName)
+                        currentGame = GameDataV3(questionTargetCount: 20, instrumentName: glop.selectedInstrumentName)
                         withAnimation {
                             showingGame = true
                         } //wa

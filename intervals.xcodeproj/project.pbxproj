@@ -24,6 +24,7 @@
 		C6F62795294EF69900ADB0FE /* GameViewV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F62794294EF69900ADB0FE /* GameViewV2.swift */; };
 		C6F62797294F19D900ADB0FE /* GameView2PlayingStage1.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F62796294F19D900ADB0FE /* GameView2PlayingStage1.swift */; };
 		C6F62799294F19FA00ADB0FE /* GameView2Summary.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F62798294F19FA00ADB0FE /* GameView2Summary.swift */; };
+		C6F6E1C429AA40E9007D91AE /* OptionalToStringOptExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F6E1C329AA40E9007D91AE /* OptionalToStringOptExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,7 @@
 		C6F62794294EF69900ADB0FE /* GameViewV2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewV2.swift; sourceTree = "<group>"; };
 		C6F62796294F19D900ADB0FE /* GameView2PlayingStage1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView2PlayingStage1.swift; sourceTree = "<group>"; };
 		C6F62798294F19FA00ADB0FE /* GameView2Summary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView2Summary.swift; sourceTree = "<group>"; };
+		C6F6E1C329AA40E9007D91AE /* OptionalToStringOptExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionalToStringOptExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +93,7 @@
 				C6A4B33A2947A6D900CEA07B /* groupedAsync.swift */,
 				C6F34FD929476E4C00611240 /* soundFX.swift */,
 				C66A7FED29A85D3C00BAE003 /* DoubleToString.swift */,
+				C6F6E1C329AA40E9007D91AE /* OptionalToStringOptExtension.swift */,
 				C61EA1D729477723005A43C7 /* sfx2 */,
 				C6F34FCF2947586D00611240 /* Assets.xcassets */,
 				C6F34FD12947586D00611240 /* Preview Content */,
@@ -181,6 +184,7 @@
 				C6E27B132948CFCE009948FB /* Instrument.swift in Sources */,
 				C6F34FCE2947586C00611240 /* ContentView.swift in Sources */,
 				C6C4D118297ED1B800610E68 /* SettingsSheet.swift in Sources */,
+				C6F6E1C429AA40E9007D91AE /* OptionalToStringOptExtension.swift in Sources */,
 				C6A4B33B2947A6D900CEA07B /* groupedAsync.swift in Sources */,
 				C6B9792E29911374007682EA /* IconChanger.swift in Sources */,
 				C6F62799294F19FA00ADB0FE /* GameView2Summary.swift in Sources */,

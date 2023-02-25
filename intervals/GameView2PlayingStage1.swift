@@ -23,7 +23,7 @@ struct GameView3PlayingStage1: View {
         } else {
             return gameData.currentAnsweredCorrectly
             ? "correct - \(gameData.correctAnswer)"
-            : "Wrong answer. The correct answer was \(gameData.correctAnswer)"
+            : "Wrong answer (\(gameData.currentAnswer.toStringOptional ?? "none" ). The correct answer was \(gameData.correctAnswer)"
         } //else
     } //cv
     var shortStatusText1: String {
@@ -42,18 +42,28 @@ struct GameView3PlayingStage1: View {
         ? "Next question"
         : "View summary"
     } //cv
+
+    private let gaugeWidth: CGFloat = 180
+    private let padWidth: CGFloat = 350
+
     var body: some View {
         VStack {
-            HStack(alignment: .top, spacing: 12) {
-                VStack(alignment: .trailing, spacing: 6) {
-                    Text("Question \( gameData.currentQuestionIndex + 1 ) / \( gameData.questionList.count )")
-                    Text("Score: \( gameData.correctlyAnsweredQuestions.count ) / \( gameData.answeredQuestions.count )")
-                        //.font(.title.bold())
-                } //vs6
-                Gauge(value: gameData.currentQuestionIndex, in: 0...gameData.questionList.count) {
-                    Text("question \(gameData.currentQuestionIndex + 1)")
-                }
+            HStack(alignment: .bottom, spacing: 18) {
+                //VStack(alignment: .trailing, spacing: 6) {
+                    //Text("Question \( gameData.currentQuestionIndex + 1 ) / \( gameData.questionList.count )")
+                    //Text("Score: \( gameData.correctlyAnsweredQuestions.count ) / \( gameData.answeredQuestions.count )")
+                    //Text("Score: \( gameData.correctlyAnsweredQuestions.count )")
+                //} //vs6
+                Gauge( value: Float( gameData.correctlyAnsweredQuestions.count), in: 0.0 ... Float( gameData.answeredQuestions.count)) {
+                    Text("Score: \( gameData.correctlyAnsweredQuestions.count )")
+                } //ga
+                .frame(maxWidth: gaugeWidth, alignment: .center)
+                Gauge( value: Float( (gameData.isGuessingState ? 0 : 1) + gameData.currentQuestionIndex ), in: 0.0 ... Float( gameData.questionList.count )) {
+                    Text("Question \( gameData.currentQuestionIndex + 1 ) of \( gameData.questionList.count )")
+                } //ga
+                .frame(maxWidth: gaugeWidth, alignment: .center)
             } //hs
+            .padding(.top)
             HStack {
 Text("  ")
                     .accessibilityLabel(Text("The next item is the play button"))
@@ -62,7 +72,8 @@ Text("  ")
                         gameData.actionPlay()
                     }
                 } label: {
-                    Image(systemName: gameData.isGuessingState ? "play.circle.fill" : "headphones")
+                    //Image(systemName: gameData.isGuessingState ? "play.circle.fill" : "headphones")
+                    Image(systemName: "play.circle.fill")
                         .padding()
                         .accessibilityLabel("  ")
                         .accessibilityValue("  ")
@@ -73,19 +84,20 @@ Text("  ")
                 .accessibilityFocused($playFocused)
                 .accessibilityAddTraits(.playsSound)
                 .accessibilityRemoveTraits(.isButton)
-            } //hs
+                if !gameData.isGuessingState {
+                    Button( continueButtonCaption ) {
+                        continueClick()
+                    } //btn
+                    .font(.title)
+                    .disabled( gameData.isGuessingState)
+                } //if
+            } //hs play
             Text( glop.shorterTexts ? shortStatusText1 : statusText1 )
                 .onTapGesture {
                     continueClick()
                 } //tap
                 .accessibilityFocused($correctFocused)
             if !gameData.isGuessingState {
-                Button( continueButtonCaption ) {
-                    continueClick()
-                } //btn
-                .font(.title)
-                .disabled( gameData.isGuessingState)
-                .padding()
                 Text("You can now tap a number to listen and compare")
             } //if
             Divider()
@@ -123,7 +135,7 @@ Text("  ")
                         } //hs
                     } //fe
                 } //vs
-                .frame(maxWidth: 350)
+                .frame(maxWidth: padWidth)
                 .transition(.move(edge: .bottom) )
             } //if
             if gameData.limitlessGame {
@@ -131,11 +143,13 @@ Text("  ")
                     gameData.actionGoDirectlyToSummary()
                 } label: {
                     Text("Finish game")
-                        .padding()
+                        .padding(.top)
                 } //btn
             } //if
         } //vs
         .font(.headline)
+        //.frame(maxWidth: 600, maxHeight: 1000, alignment: .top)
+        //.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         .axFocusAppear {
             self.playFocused = true
         } //axapp
@@ -149,8 +163,10 @@ Text("  ")
     } //func
     func padTap(_ interval: Int) {
         if gameData.isGuessingState {
-            gameData.actionGuess(interval)
-            correctFocused = true
+            withAnimation {
+                gameData.actionGuess(interval)
+                correctFocused = true
+            } //wa
         } else {
             gameData.actionCustomPlay( interval)
         } //else
@@ -170,7 +186,7 @@ extension View {
     func padButtonInnerText() -> some View {
         self
             .font(.title)
-                .padding()
+                .padding(4)
                 .frame(maxWidth: .infinity)
     } //func
 } //ext
