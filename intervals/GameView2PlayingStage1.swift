@@ -18,12 +18,12 @@ struct GameView3PlayingStage1: View {
     var statusText1: String {
         if gameData.isGuessingState {
             return gameData.canGuessAnswer
-            ? "how many semitones are in the interval?"
+            ? "How many semitones are in the interval?"
             : "Tap Play to hear the interval, then you can enter your answer"
         } else {
             return gameData.currentAnsweredCorrectly
-            ? "correct - \(gameData.correctAnswer)"
-            : "Wrong answer (\(gameData.currentAnswer.toStringOptional ?? "none" ). The correct answer was \(gameData.correctAnswer)"
+            ? "Correct - \(gameData.correctAnswer)"
+            : "Wrong answer (\(gameData.currentAnswer.toStringOptional ?? "none" )). The correct answer was \(gameData.correctAnswer)"
         } //else
     } //cv
     var shortStatusText1: String {
@@ -33,7 +33,7 @@ struct GameView3PlayingStage1: View {
             : "Tap Play to hear."
         } else {
             return gameData.currentAnsweredCorrectly
-            ? "correct - \(gameData.correctAnswer)"
+            ? "Correct - \(gameData.correctAnswer)"
             : "Wrong, \(gameData.correctAnswer)"
         } //else
     } //cv
@@ -97,7 +97,7 @@ Text("  ")
                     continueClick()
                 } //tap
                 .accessibilityFocused($correctFocused)
-            if !gameData.isGuessingState {
+            if !gameData.isGuessingState && !glop.shorterTexts {
                 Text("You can now tap a number to listen and compare")
             } //if
             Divider()

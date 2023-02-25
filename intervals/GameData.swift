@@ -31,6 +31,8 @@ class GameDataV3: ObservableObject {
     } //cl //init
     private let glop = GlobalPreferences2.global
     var selectedInstrument: InstrumentV3
+    private var chosenFixedRoot: Int
+    private var lastIntervalSize: Int?
 
     @Published private(set) var limitlessGame: Bool
     @Published var questionList: [Question]
@@ -51,6 +53,7 @@ class GameDataV3: ObservableObject {
         case playing, summary
     } //enum
     @Published public private(set) var gameState: GameStateType
+
     var canGuessAnswer: Bool {
         currentQuestionTimesPlayed > 0
     } //cv
@@ -95,6 +98,7 @@ class GameDataV3: ObservableObject {
     init(questionTargetCount: Int = 0, instrumentName: String = "") {
         let instData = GlobalPreferences2.availableInstruments[instrumentName] ?? ("", 0, 0)
         self.selectedInstrument = InstrumentV3(name: instrumentName, minNote: instData.minNote, maxNote: instData.maxNote)
+        self.chosenFixedRoot = 0
 
         self.revisitationCount = 0
         self.endTimes = []
@@ -113,6 +117,7 @@ class GameDataV3: ObservableObject {
 
         gameState = .playing
 
+        chosenFixedRoot = getNewRoot()
         generateQuestions(targetCount: questionTargetCount)
         fetchNewQuestion()
     } //init
@@ -220,10 +225,9 @@ class GameDataV3: ObservableObject {
         isGuessingState = true
     } //func
     private func fetchLimitless() {
-        //tochange
-        let chosenRoot = getNewRoot()
-        let newSize = getNewIntervalSize()
-        let newRoot = self.glop.changeRootEveryIntervalChange ? self.getNewRoot(for: newSize) : chosenRoot
+        let newSize = getNewIntervalSize( differentFrom: glop.newIntervalMustBeDifferent ? lastIntervalSize : nil)
+        lastIntervalSize = newSize
+        let newRoot = self.glop.changeRootEveryIntervalChange ? self.getNewRoot(for: newSize) : chosenFixedRoot
         let interval = NoteIntervalV3(rootNote: newRoot, size: newSize)
         questionList.append( Question(interval: interval))
         currentQuestionIndex = questionList.count - 1
@@ -237,10 +241,10 @@ func canFetchNewQuestion() -> Bool {
         return !questionsStarted || (currentQuestionIndex < (questionList.count - 1))
     } //func
     private func generateQuestions( targetCount: Int) {
-        let chosenRoot = getNewRoot()
         questionList = [Int](repeating: 0, count: targetCount).map({ _ in
-            let newSize = getNewIntervalSize()
-            let newRoot = self.glop.changeRootEveryIntervalChange ? self.getNewRoot(for: newSize) : chosenRoot
+            let newSize = getNewIntervalSize( differentFrom: glop.newIntervalMustBeDifferent ? lastIntervalSize : nil)
+            self.lastIntervalSize = newSize
+            let newRoot = self.glop.changeRootEveryIntervalChange ? self.getNewRoot(for: newSize) : chosenFixedRoot
             let interval = NoteIntervalV3(rootNote: newRoot, size: newSize)
             return Question(interval: interval)
         })
@@ -249,8 +253,14 @@ func canFetchNewQuestion() -> Bool {
         let lowerBound = glop.onlyAscending ? 0 : (-glop.maxSizeToRandomize)
         return lowerBound ... (glop.maxSizeToRandomize)
     } //func
-    private func getNewIntervalSize() -> Int {
-        allowedIntervalRange().randomElement() ?? allowedIntervalRange().lowerBound
+    private func getNewIntervalSize( differentFrom: Int? = nil) -> Int {
+        let range = allowedIntervalRange()
+        let enableCheck = (differentFrom != nil) && (range.upperBound > range.lowerBound)
+        var rv = range.randomElement() ?? range.lowerBound
+        while enableCheck && rv == differentFrom {
+            rv = range.randomElement() ?? range.lowerBound
+        } //wh
+        return rv
     } //func
     private func getNewRoot( for specificInterval: Int? = nil) -> Int {
         var intervalRange = self.allowedIntervalRange()
