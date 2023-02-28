@@ -6,45 +6,11 @@
 	objectVersion = 56;
 	objects = {
 
-/* Begin PBXBuildFile section */
-		C61EA1D829477723005A43C7 /* sfx2 in Resources */ = {isa = PBXBuildFile; fileRef = C61EA1D729477723005A43C7 /* sfx2 */; };
-		C6238CBA294F9DB20049218F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6238CB9294F9DB20049218F /* SettingsView.swift */; };
-		C6A4B33B2947A6D900CEA07B /* groupedAsync.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A4B33A2947A6D900CEA07B /* groupedAsync.swift */; };
-		C6A5A6FC294C63290009D096 /* GameData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A5A6FB294C63290009D096 /* GameData.swift */; };
-		C6E27B132948CFCE009948FB /* Instrument.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6E27B122948CFCE009948FB /* Instrument.swift */; };
-		C6E27B15294908AE009948FB /* PreferencesClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6E27B14294908AE009948FB /* PreferencesClass.swift */; };
-		C6F34FCC2947586C00611240 /* intervalsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F34FCB2947586C00611240 /* intervalsApp.swift */; };
-		C6F34FCE2947586C00611240 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F34FCD2947586C00611240 /* ContentView.swift */; };
-		C6F34FD02947586D00611240 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C6F34FCF2947586D00611240 /* Assets.xcassets */; };
-		C6F34FD32947586D00611240 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C6F34FD22947586D00611240 /* Preview Assets.xcassets */; };
-		C6F34FDA29476E4C00611240 /* soundFX.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F34FD929476E4C00611240 /* soundFX.swift */; };
-		C6F34FDC2947715B00611240 /* note sounds in Resources */ = {isa = PBXBuildFile; fileRef = C6F34FDB2947715B00611240 /* note sounds */; };
-		C6F62793294EF5A000ADB0FE /* GameViewV1.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F62792294EF5A000ADB0FE /* GameViewV1.swift */; };
-		C6F62795294EF69900ADB0FE /* GameViewV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F62794294EF69900ADB0FE /* GameViewV2.swift */; };
-		C6F62797294F19D900ADB0FE /* GameView2PlayingStage1.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F62796294F19D900ADB0FE /* GameView2PlayingStage1.swift */; };
-		C6F62799294F19FA00ADB0FE /* GameView2Summary.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F62798294F19FA00ADB0FE /* GameView2Summary.swift */; };
-		C6F6279B294F1A1900ADB0FE /* GameView2Revisit.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F6279A294F1A1900ADB0FE /* GameView2Revisit.swift */; };
-/* End PBXBuildFile section */
-
 /* Begin PBXFileReference section */
-		C61EA1D729477723005A43C7 /* sfx2 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = sfx2; sourceTree = "<group>"; };
-		C6238CB9294F9DB20049218F /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		C6A4B33A2947A6D900CEA07B /* groupedAsync.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = groupedAsync.swift; sourceTree = "<group>"; };
-		C6A5A6FB294C63290009D096 /* GameData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameData.swift; sourceTree = "<group>"; };
-		C6E27B122948CFCE009948FB /* Instrument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Instrument.swift; sourceTree = "<group>"; };
-		C6E27B14294908AE009948FB /* PreferencesClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesClass.swift; sourceTree = "<group>"; };
+		C6EB7AFA29AE2003009AF6F7 /* index.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = index.md; sourceTree = "<group>"; };
+		C6EB7AFB29AE2D54009AF6F7 /* ico */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ico; sourceTree = "<group>"; };
+		C6EB7AFC29AE2D54009AF6F7 /* _config.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = _config.yml; sourceTree = "<group>"; };
 		C6F34FC82947586C00611240 /* intervals.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = intervals.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		C6F34FCB2947586C00611240 /* intervalsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = intervalsApp.swift; sourceTree = "<group>"; };
-		C6F34FCD2947586C00611240 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		C6F34FCF2947586D00611240 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		C6F34FD22947586D00611240 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		C6F34FD929476E4C00611240 /* soundFX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = soundFX.swift; sourceTree = "<group>"; };
-		C6F34FDB2947715B00611240 /* note sounds */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "note sounds"; sourceTree = SOURCE_ROOT; };
-		C6F62792294EF5A000ADB0FE /* GameViewV1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewV1.swift; sourceTree = "<group>"; };
-		C6F62794294EF69900ADB0FE /* GameViewV2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewV2.swift; sourceTree = "<group>"; };
-		C6F62796294F19D900ADB0FE /* GameView2PlayingStage1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView2PlayingStage1.swift; sourceTree = "<group>"; };
-		C6F62798294F19FA00ADB0FE /* GameView2Summary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView2Summary.swift; sourceTree = "<group>"; };
-		C6F6279A294F1A1900ADB0FE /* GameView2Revisit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView2Revisit.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,7 +27,9 @@
 		C6F34FBF2947586C00611240 = {
 			isa = PBXGroup;
 			children = (
-				C6F34FCA2947586C00611240 /* intervals */,
+				C6EB7AFA29AE2003009AF6F7 /* index.md */,
+				C6EB7AFC29AE2D54009AF6F7 /* _config.yml */,
+				C6EB7AFB29AE2D54009AF6F7 /* ico */,
 				C6F34FC92947586C00611240 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -72,38 +40,6 @@
 				C6F34FC82947586C00611240 /* intervals.app */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		C6F34FCA2947586C00611240 /* intervals */ = {
-			isa = PBXGroup;
-			children = (
-				C6F34FCB2947586C00611240 /* intervalsApp.swift */,
-				C6E27B14294908AE009948FB /* PreferencesClass.swift */,
-				C6F34FCD2947586C00611240 /* ContentView.swift */,
-				C6F62794294EF69900ADB0FE /* GameViewV2.swift */,
-				C6F62796294F19D900ADB0FE /* GameView2PlayingStage1.swift */,
-				C6F62798294F19FA00ADB0FE /* GameView2Summary.swift */,
-				C6F6279A294F1A1900ADB0FE /* GameView2Revisit.swift */,
-				C6238CB9294F9DB20049218F /* SettingsView.swift */,
-				C6F62792294EF5A000ADB0FE /* GameViewV1.swift */,
-				C6A5A6FB294C63290009D096 /* GameData.swift */,
-				C6E27B122948CFCE009948FB /* Instrument.swift */,
-				C6A4B33A2947A6D900CEA07B /* groupedAsync.swift */,
-				C6F34FD929476E4C00611240 /* soundFX.swift */,
-				C61EA1D729477723005A43C7 /* sfx2 */,
-				C6F34FDB2947715B00611240 /* note sounds */,
-				C6F34FCF2947586D00611240 /* Assets.xcassets */,
-				C6F34FD12947586D00611240 /* Preview Content */,
-			);
-			path = intervals;
-			sourceTree = "<group>";
-		};
-		C6F34FD12947586D00611240 /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				C6F34FD22947586D00611240 /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -164,10 +100,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C6F34FD32947586D00611240 /* Preview Assets.xcassets in Resources */,
-				C6F34FD02947586D00611240 /* Assets.xcassets in Resources */,
-				C6F34FDC2947715B00611240 /* note sounds in Resources */,
-				C61EA1D829477723005A43C7 /* sfx2 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -178,19 +110,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C6E27B132948CFCE009948FB /* Instrument.swift in Sources */,
-				C6F34FCE2947586C00611240 /* ContentView.swift in Sources */,
-				C6F6279B294F1A1900ADB0FE /* GameView2Revisit.swift in Sources */,
-				C6A4B33B2947A6D900CEA07B /* groupedAsync.swift in Sources */,
-				C6F62799294F19FA00ADB0FE /* GameView2Summary.swift in Sources */,
-				C6F34FCC2947586C00611240 /* intervalsApp.swift in Sources */,
-				C6A5A6FC294C63290009D096 /* GameData.swift in Sources */,
-				C6F62795294EF69900ADB0FE /* GameViewV2.swift in Sources */,
-				C6F34FDA29476E4C00611240 /* soundFX.swift in Sources */,
-				C6E27B15294908AE009948FB /* PreferencesClass.swift in Sources */,
-				C6F62793294EF5A000ADB0FE /* GameViewV1.swift in Sources */,
-				C6F62797294F19D900ADB0FE /* GameView2PlayingStage1.swift in Sources */,
-				C6238CBA294F9DB20049218F /* SettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

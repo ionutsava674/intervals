@@ -1,0 +1,10 @@
+theme: jekyll-theme-tactile
+title: ionutsava674 home page
+plugins:
+  - jekyll-relative-links
+relative-links:
+  enabled: true
+  collections: true
+include:
+  - index.md
+
